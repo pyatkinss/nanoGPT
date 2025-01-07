@@ -43,10 +43,9 @@ val_ids.tofile(os.path.join(os.path.dirname(__file__), 'val.bin'))
 
 # save the meta information as well, to help us encode/decode later
 vocab_dict = tokenizer.get_vocab()
-vocab_dict = {tokenizer.decode([id]): id for token, id in vocab_dict.items()}
 vocab_size = len(vocab_dict)
-stoi = vocab_dict
-itos = {idx: token for token, idx in vocab_dict.items()}
+itos = {idx: tokenizer.decode([idx]) for token, idx in vocab_dict.items()}
+stoi = {token: idx for token, idx in vocab_dict.items()}
 
 meta = {
     'vocab_size': vocab_size,
