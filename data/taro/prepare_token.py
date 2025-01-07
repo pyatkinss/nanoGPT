@@ -29,9 +29,7 @@ val_data = data[int(n*0.9):]
 # train_ids = enc.encode_ordinary(train_data)
 # val_ids = enc.encode_ordinary(val_data)
 
-# tokenizer  = AutoTokenizer.from_pretrained("ai-forever/ru-en-RoSBERTa")
-model_name = "ai-sage/GigaChat-20B-A3B-instruct"
-tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
+tokenizer = AutoTokenizer.from_pretrained("Dmitriy007/rugpt2_gen_news")
 train_ids = tokenizer(train_data)['input_ids']
 val_ids = tokenizer(val_data)['input_ids']
 print(f"train has {len(train_ids):,} tokens")
@@ -45,6 +43,7 @@ val_ids.tofile(os.path.join(os.path.dirname(__file__), 'val.bin'))
 
 # save the meta information as well, to help us encode/decode later
 vocab_dict = tokenizer.get_vocab()
+vocab_dict = {tokenizer.decode([id]): id for token, id in vocab_dict.items()}
 vocab_size = len(vocab_dict)
 stoi = vocab_dict
 itos = {idx: token for token, idx in vocab_dict.items()}
