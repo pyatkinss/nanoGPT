@@ -6,11 +6,13 @@ from pathlib import Path
 
 
 current_file = Path(__file__)
-two_levels_up = current_file.parents[1]
+two_levels_up = current_file.parents[3]
 
-input_files_path = os.path.join(two_levels_up, 'txt')
+input_files_path = os.path.join(two_levels_up, 'data/txt')
 input_file_paths = os.listdir(input_files_path)
+input_file_paths = [os.path.join(input_files_path, path) for path in input_file_paths]
 
+data = ""
 for path in input_file_paths:
     with open(path, "r", encoding='windows-1251') as file:
         content = file.read()
