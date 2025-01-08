@@ -45,7 +45,7 @@ val_ids.tofile(os.path.join(os.path.dirname(__file__), 'val.bin'))
 vocab_dict = tokenizer.get_vocab()
 vocab_size = len(vocab_dict)
 itos = {idx: tokenizer.decode([idx]) for token, idx in vocab_dict.items()}
-stoi = {token: idx for token, idx in vocab_dict.items()}
+stoi = {token: idx for idx, token in itos.items()}
 
 meta = {
     'vocab_size': vocab_size,
